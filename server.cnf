@@ -1,0 +1,62 @@
+#
+# These groups are read by MariaDB server.
+# Use it for options that only the server (but not clients) should see
+#
+# See the examples of server my.cnf files in /usr/share/mysql/
+#
+
+# this is read by the standalone daemon and embedded servers
+[server]
+
+# this is only for the mysqld standalone daemon
+[mysqld]
+collation-server = utf8mb4_unicode_ci
+character-set-server=utf8mb4
+max_heap_table_size = 64M
+tmp_table_size = 64M
+join_buffer_size = 64M
+innodb_file_format = Barracuda
+innodb_large_prefix = 1
+innodb_flush_log_at_timeout = 3
+innodb_buffer_pool_size = 1GB
+innodb_buffer_pool_instances = 10
+# Based on what type for storage you use. The below values are for SSD drives.
+# Change it if Cacti reports issues during the installation
+innodb_read_io_threads = 32
+innodb_write_io_threads = 16
+innodb_io_capacity = 5000
+innodb_io_capacity_max = 10000
+
+#
+# * Galera-related settings
+#
+[galera]
+# Mandatory settings
+#wsrep_on=ON
+#wsrep_provider=
+#wsrep_cluster_address=
+#binlog_format=row
+#default_storage_engine=InnoDB
+#innodb_autoinc_lock_mode=2
+#
+# Allow server to accept connections on all interfaces.
+#
+#bind-address=0.0.0.0
+#
+# Optional setting
+#wsrep_slave_threads=1
+#innodb_flush_log_at_trx_commit=0
+
+# this is only for embedded server
+[embedded]
+
+# This group is only read by MariaDB servers, not by MySQL.
+# If you use the same .cnf file for MySQL and MariaDB,
+# you can put MariaDB-only options here
+[mariadb]
+
+# This group is only read by MariaDB-10.4 servers.
+# If you use the same .cnf file for MariaDB of different versions,
+# use this group for options that older servers don't understand
+[mariadb-10.4]
+
